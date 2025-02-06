@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Linter
         run: |
-          find ./giftlink-backend -name "*.js" -exec jshint {} +
+          find ./giftlink-backend -name "*.js" -exec jshint {} --config <(echo '{ "esversion": 9 }') +
           echo "Linted all JavaScript files successfully"
 
   client_build:
@@ -39,9 +39,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Run build
+      - name: Set environment variables
+        run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
+
+      - name: Install Dependencies
         run: |
           cd giftlink-frontend
           npm install
+
+      - name: Build Frontend
+        run: |
+          cd giftlink-frontend
           npm run build
           echo "Client-side build completed successfully"
