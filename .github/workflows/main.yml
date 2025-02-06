@@ -20,12 +20,12 @@ jobs:
           node-version: 18
 
       - name: Install JSHint
-        run: npm install jshint --global
+        run: npm install -g jshint
 
       - name: Run Linter
         run: |
-          find ./giftlink-backend -name "*.js" -exec jshint {} --config <(echo '{ "esversion": 9 }') +
-          echo "Linted all JavaScript files successfully"
+          echo '{ "esversion": 9 }' > .jshintrc  # Create config file dynamically
+          find ./giftlink-backend -name "*.js" -exec jshint {} +
 
   client_build:
     name: Build Frontend Client
@@ -39,13 +39,13 @@ jobs:
         with:
           node-version: 18
 
-      - name: Set environment variables
-        run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
-
       - name: Install Dependencies
         run: |
           cd giftlink-frontend
           npm install
+
+      - name: Set OpenSSL Legacy Mode
+        run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
 
       - name: Build Frontend
         run: |
