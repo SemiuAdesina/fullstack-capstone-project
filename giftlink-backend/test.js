@@ -1,1 +1,2 @@
-let x;  // ✅ Valid
+let x;  // ✅ Validempty
+
