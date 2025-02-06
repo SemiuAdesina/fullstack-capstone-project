@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: giftlink-frontend
+  labels:
+    app: giftlink-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: giftlink-frontend
+  template:
+    metadata:
+      labels:
+        app: giftlink-frontend
+    spec:
+      containers:
+      - name: giftlink-frontend-container
+        image: giftlink-frontend:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3001  # ✅ Ensure this matches Dockerfile
+        env:
+        - name: REACT_APP_BACKEND_URL
+          value: "http://localhost:3060"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: giftlink-frontend-service
+spec:
+  type: NodePort
+  ports:
+  - port: 3001  # ✅ Ensure service also runs on 3001
+    targetPort: 3001
+    protocol: TCP
+  selector:
+    app: giftlink-frontend

@@ -1,0 +1,29 @@
+/* UpdateGiftPage.css */
+
+.update-gift-container {
+    margin-top: 2rem;
+}
+
+.update-gift-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.update-gift-form h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.update-gift-form .form-label {
+    font-weight: 500;
+}
+
+.update-gift-form .form-control {
+    margin-bottom: 15px;
+}
+
+.update-gift-form .btn {
+    width: 100%;
+}

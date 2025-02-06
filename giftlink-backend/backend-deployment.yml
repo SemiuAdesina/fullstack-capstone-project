@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: giftlink-backend
+  labels:
+    app: giftlink-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: giftlink-backend
+  template:
+    metadata:
+      labels:
+        app: giftlink-backend
+    spec:
+      containers:
+      - name: giftlink-backend-container
+        image: giftlink-backend:latest  # ✅ Uses local Docker image
+        imagePullPolicy: Never  # ✅ Prevents pulling from an external registry
+        ports:
+        - containerPort: 3060
+        env:
+        - name: MONGO_URL
+          value: "mongodb+srv://sadesina893:Face$mask01@cluster0.l7ztl.mongodb.net/"
+        - name: JWT_SECRET
+          value: "setasecret"
+        - name: PORT
+          value: "3060"
+        - name: CLOUDINARY_CLOUD_NAME
+          value: "dnga456vp"
+        - name: CLOUDINARY_API_KEY
+          value: "793371917173739"
+        - name: CLOUDINARY_API_SECRET
+          value: "vkuA14BOQBbqcgx_3uayELg6cYY"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: giftlink-backend-service
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 3060
+    protocol: TCP
+  selector:
+    app: giftlink-backend
