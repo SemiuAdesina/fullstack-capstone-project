@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Linter
         run: |
-          echo '{ "esversion": 9 }' > .jshintrc  # Create config file dynamically
+          echo '{ "esversion": 9 }' > .jshintrc  # Ensure JSHint config is set
           find ./giftlink-backend -name "*.js" -exec jshint {} +
 
   client_build:
@@ -51,4 +51,6 @@ jobs:
         run: |
           cd giftlink-frontend
           npm run build
-          echo "Client-side build completed successfully"
+
+      - name: Confirm Build Success
+        run: echo "✅ Client-side build completed successfully"
