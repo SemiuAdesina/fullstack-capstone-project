@@ -44,10 +44,14 @@ jobs:
           cd giftlink-frontend
           npm install
 
-      - name: Set OpenSSL Legacy Mode
-        run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
+      - name: Set OpenSSL Legacy Mode (Temporary Fix)
+        run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
+          echo "Using OpenSSL Legacy Mode"
 
       - name: Build Frontend
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
         run: |
           cd giftlink-frontend
           npm run build
