@@ -28,12 +28,12 @@ async function loadData() {
         let cursor = await collection.find({});
         let documents = await cursor.toArray();
 
-        if(documents.length == 0) {
+        if (documents.length == 0) {
             // Insert data into the collection
             const insertResult = await collection.insertMany(data);
             console.log('Inserted documents:', insertResult.insertedCount);
         } else {
-            console.log("Gifts already exists in DB")
+            console.log("Gifts already exist in DB");
         }
     } catch (err) {
         console.error(err);
@@ -47,4 +47,4 @@ loadData();
 
 module.exports = {
     loadData,
-  };
+}; // ✅ Added missing semicolon here
